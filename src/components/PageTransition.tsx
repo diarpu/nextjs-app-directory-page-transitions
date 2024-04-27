@@ -51,7 +51,6 @@ export default function PageTransition({ children }: Props) {
     routingPageOffset,
     setRoutingPageOffset
   } = useStore()
-  // const [endTranstion, setEndTransition] = useState<boolean>(false)
 
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -76,16 +75,6 @@ export default function PageTransition({ children }: Props) {
     }
   }, [pathname])
 
-  // useEffect(() => {
-  //   if (finishTranstion) {
-  //     const current = currentRef.current
-  //     if (current) {
-  //       current.removeAttribute('style')
-  //     }
-  //     setFinishTransition(false)
-  //   }
-  // }, [finishTranstion])
-
   useLayoutEffect(() => {
     if (!currentRef.current) return
     if (!lastRef.current) lastRef.current = currentRef.current.children
@@ -102,103 +91,7 @@ export default function PageTransition({ children }: Props) {
   useLayoutEffect(() => {
     const mm = gsap.matchMedia()
 
-    // const tl = gsap.timeline({
-    //   defaults: {
-    //     ease: 'expo.out',
-    //     duration: 1.4,
-    //     transformOrigin: 'center'
-    //   }
-    // })
-
     if (currentRef.current && tempRef.current && !isFirstRender) {
-      // tl.set(tempRef.current, {
-      //   width: '100vw',
-      //   height: '100dvh',
-      //   overflow: 'hidden'
-      // })
-
-      // tl.set(currentRef.current, {
-      //   position: 'absolute',
-      //   top: 0,
-      //   left: '100vw',
-      //   width: '100vw',
-      //   height: '100dvh',
-      //   overflow: 'hidden'
-      // })
-
-      // tl.fromTo(
-      //   tempRef.current,
-      //   {
-      //     scale: 1
-      //   },
-      //   {
-      //     scale: 0.74,
-      //     onStart: () => {
-      //       setIsTransitionActive(true)
-      //     }
-      //   }
-      // )
-
-      // tl.fromTo(
-      //   tempRef.current,
-      //   {
-      //     x: 0
-      //   },
-      //   {
-      //     x: '-100vw'
-      //   },
-      //   '-=0.6'
-      // )
-
-      // tl.fromTo(
-      //   currentRef.current,
-      //   {
-      //     position: 'absolute',
-      //     top: 0,
-      //     left: '100vw',
-      //     scale: 0.74
-      //   },
-      //   {
-      //     position: 'absolute',
-      //     top: 0,
-      //     left: 0
-      //   },
-      //   '-=1.2'
-      // )
-
-      // tl.fromTo(
-      //   currentRef.current,
-      //   {
-      //     scale: 0.74
-      //   },
-      //   {
-      //     scale: 1,
-      //     onComplete: () => {
-      //       setCurrentPath(pathname)
-      //       setIsTransitionActive(false)
-      //       setRoutingPageOffset(0)
-      //       // setFinishTransition(true)
-
-      //       if (shouldScrollRestore) {
-      //         setTimeout(() => {
-      //           restoreScrollPos(pathname)
-      //           setShouldScrollRestore(false)
-      //         }, 500)
-      //       }
-      //     }
-      //   },
-      //   '-=0.6'
-      // )
-
-      // tl.set(currentRef.current, {
-      //   position: 'relative',
-      //   width: '100%',
-      //   height: '100%',
-      //   overflow: 'visible'
-      // })
-
-      // Animation 2
-
       mm.add(
         {
           isDesktop: '(min-width: 772px)',
@@ -278,10 +171,6 @@ export default function PageTransition({ children }: Props) {
         }
       )
     }
-
-    // return () => {
-    //   tl.kill()
-    // }
   }, [isFirstRender, pathname, setIsTransitionActive])
 
   return (
